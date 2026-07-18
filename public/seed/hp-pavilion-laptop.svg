@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#1E2024" />
+      <stop offset="55%" stop-color="#141518" />
+      <stop offset="100%" stop-color="#0A0B0D" />
+    </radialGradient>
+    <linearGradient id="metal3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9AA0A6" />
+      <stop offset="100%" stop-color="#5B6168" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#glow)" />
+  <g stroke="#23262B" stroke-width="1">
+    <line x1="0" y1="300" x2="1200" y2="300" opacity="0.4" />
+    <line x1="0" y1="900" x2="1200" y2="900" opacity="0.4" />
+  </g>
+  <g transform="translate(600,600)">
+    <path d="M -260 -180 L 260 -180 L 260 140 L -260 140 Z" fill="none" stroke="url(#metal3)" stroke-width="10" />
+    <path d="M -240 -160 L 240 -160 L 240 120 L -240 120 Z" fill="#101114" stroke="#2B2E33" stroke-width="2" />
+    <path d="M -320 140 L -260 140 L 260 140 L 320 140 L 300 190 L -300 190 Z" fill="none" stroke="url(#metal3)" stroke-width="10" stroke-linejoin="round" />
+  </g>
+  <text x="600" y="1080" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#94999F" letter-spacing="2">HP Pavilion 15 Core i5</text>
+</svg>

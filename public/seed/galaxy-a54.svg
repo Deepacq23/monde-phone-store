@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#1E2024" />
+      <stop offset="55%" stop-color="#141518" />
+      <stop offset="100%" stop-color="#0A0B0D" />
+    </radialGradient>
+    <linearGradient id="metal2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9AA0A6" />
+      <stop offset="100%" stop-color="#5B6168" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#glow)" />
+  <g stroke="#23262B" stroke-width="1">
+    <line x1="0" y1="300" x2="1200" y2="300" opacity="0.4" />
+    <line x1="0" y1="900" x2="1200" y2="900" opacity="0.4" />
+  </g>
+  <g transform="translate(600,560)">
+    <rect x="-150" y="-320" width="300" height="640" rx="34" fill="none" stroke="url(#metal2)" stroke-width="10" />
+    <rect x="-132" y="-300" width="264" height="600" rx="20" fill="#101114" stroke="#2B2E33" stroke-width="2" />
+    <circle cx="0" cy="-268" r="8" fill="none" stroke="url(#metal2)" stroke-width="4" />
+    <g transform="translate(-92,-256)">
+      <circle cx="0" cy="0" r="16" fill="none" stroke="url(#metal2)" stroke-width="5" />
+      <circle cx="34" cy="18" r="16" fill="none" stroke="url(#metal2)" stroke-width="5" />
+      <circle cx="0" cy="36" r="16" fill="none" stroke="url(#metal2)" stroke-width="5" />
+    </g>
+  </g>
+  <text x="600" y="1080" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#94999F" letter-spacing="2">Samsung Galaxy A54 5G</text>
+</svg>
