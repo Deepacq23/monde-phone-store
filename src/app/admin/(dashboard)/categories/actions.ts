@@ -92,3 +92,24 @@ export async function deleteCategory(id: string): Promise<{ error?: string }> {
   revalidateStorefront();
   return {};
 }
+
+export async function setCategoryImage(
+  id: string,
+  imageUrl: string | null
+): Promise<{ error?: string }> {
+  await requireAdmin();
+
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("categories")
+    .update({ image_url: imageUrl })
+    .eq("id", id);
+
+  if (error) {
+    console.error("setCategoryImage:", error);
+    return { error: "Failed to update category image." };
+  }
+
+  revalidateStorefront();
+  return {};
+}

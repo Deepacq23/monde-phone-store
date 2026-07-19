@@ -1,17 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
+import { CategoryCard } from "@/components/CategoryCard";
+import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TrustBadges } from "@/components/TrustBadges";
 import { EmptyState } from "@/components/EmptyState";
-import { getCategories, getFeaturedProducts } from "@/lib/data";
+import {
+  getCategories,
+  getCategoryProductCounts,
+  getFeaturedProducts,
+} from "@/lib/data";
 import { HERO_SUBTITLE, SITE_TAGLINE } from "@/lib/constants";
 import { buildGeneralWhatsAppUrl } from "@/lib/whatsapp";
 
 export default async function HomePage() {
-  const [categories, featuredProducts] = await Promise.all([
+  const [categories, featuredProducts, categoryCounts] = await Promise.all([
     getCategories(),
     getFeaturedProducts(4),
+    getCategoryProductCounts(),
   ]);
 
   const chatUrl = buildGeneralWhatsAppUrl(
@@ -100,24 +107,28 @@ export default async function HomePage() {
 
       {/* Featured Deals */}
       <section className="mx-auto max-w-8xl px-5 py-16 sm:px-8 sm:py-20">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading
-            eyebrow="This Week"
-            title="Featured Deals"
-            description="Hand-picked deals this week — available while stock lasts."
-          />
-          <Link
-            href="/products"
-            className="text-sm font-semibold text-accent transition hover:text-accent-hover"
-          >
-            View All →
-          </Link>
-        </div>
+        <Reveal>
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <SectionHeading
+              eyebrow="This Week"
+              title="Featured Deals"
+              description="Hand-picked deals this week — available while stock lasts."
+            />
+            <Link
+              href="/products"
+              className="text-sm font-semibold text-accent transition hover:text-accent-hover"
+            >
+              View All →
+            </Link>
+          </div>
+        </Reveal>
 
         {featuredProducts.length > 0 ? (
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} showDealBadge />
+            {featuredProducts.map((product, i) => (
+              <Reveal key={product.id} delay={i * 80}>
+                <ProductCard product={product} showDealBadge />
+              </Reveal>
             ))}
           </div>
         ) : (
@@ -133,18 +144,17 @@ export default async function HomePage() {
       {/* Category showcase */}
       <section className="border-t border-border bg-surface/40">
         <div className="mx-auto max-w-8xl px-5 py-16 sm:px-8 sm:py-20">
-          <SectionHeading eyebrow="Categories" title="Shop by Category" />
+          <Reveal>
+            <SectionHeading eyebrow="Categories" title="Shop by Category" />
+          </Reveal>
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-5">
-            {categories.map((category) => (
-              <Link
-                key={category.id}
-                href={`/products?category=${category.slug}`}
-                className="group flex aspect-square flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-surface p-4 text-center transition hover:-translate-y-1 hover:border-accent/40"
-              >
-                <span className="font-heading text-base font-semibold text-foreground transition group-hover:text-accent sm:text-lg">
-                  {category.name}
-                </span>
-              </Link>
+            {categories.map((category, i) => (
+              <Reveal key={category.id} delay={i * 80}>
+                <CategoryCard
+                  category={category}
+                  productCount={categoryCounts[category.id]}
+                />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -153,6 +163,7 @@ export default async function HomePage() {
       {/* Delivery info */}
       <section className="mx-auto max-w-8xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid grid-cols-1 gap-10 rounded-3xl border border-border bg-surface p-8 sm:p-12 lg:grid-cols-3">
+          <Reveal>
           <div>
             <p className="font-heading text-2xl font-bold text-accent">01</p>
             <p className="mt-2 font-heading text-lg font-semibold text-foreground">
@@ -163,6 +174,8 @@ export default async function HomePage() {
               message us directly.
             </p>
           </div>
+          </Reveal>
+          <Reveal delay={120}>
           <div>
             <p className="font-heading text-2xl font-bold text-accent">02</p>
             <p className="mt-2 font-heading text-lg font-semibold text-foreground">
@@ -173,6 +186,8 @@ export default async function HomePage() {
               your old device.
             </p>
           </div>
+          </Reveal>
+          <Reveal delay={240}>
           <div>
             <p className="font-heading text-2xl font-bold text-accent">03</p>
             <p className="mt-2 font-heading text-lg font-semibold text-foreground">
@@ -182,6 +197,7 @@ export default async function HomePage() {
               We deliver safely to Dar es Salaam and all regions of Tanzania.
             </p>
           </div>
+          </Reveal>
         </div>
       </section>
     </>

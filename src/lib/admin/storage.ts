@@ -33,3 +33,22 @@ export async function deleteProductImageByUrl(url: string): Promise<void> {
   const supabase = createClient();
   await supabase.storage.from(PRODUCT_IMAGES_BUCKET).remove([path]);
 }
+
+/** Category cover images live in the same public bucket under a prefix. */
+export async function uploadCategoryImage(file: File): Promise<string> {
+  const supabase = createClient();
+  const ext = file.name.split(".").pop() || "jpg";
+  const path = `categories/${crypto.randomUUID()}.${ext}`;
+
+  const { error } = await supabase.storage
+    .from(PRODUCT_IMAGES_BUCKET)
+    .upload(path, file, { cacheControl: "3600", upsert: false });
+
+  if (error) throw error;
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from(PRODUCT_IMAGES_BUCKET).getPublicUrl(path);
+
+  return publicUrl;
+}

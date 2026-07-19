@@ -11,8 +11,12 @@ create table if not exists categories (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   slug text not null unique,
+  image_url text,
   created_at timestamptz not null default now()
 );
+
+-- Existing installs: add the column if the table pre-dates it
+alter table categories add column if not exists image_url text;
 
 -- ---------------------------------------------------------------------------
 -- products

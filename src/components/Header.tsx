@@ -19,7 +19,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 sm:flex">
+        <nav className="flex items-center gap-4 sm:gap-8">
           <Link
             href="/"
             className="text-sm font-medium text-muted transition hover:text-foreground"
@@ -30,7 +30,8 @@ export function Header() {
             href="/products"
             className="text-sm font-medium text-muted transition hover:text-foreground"
           >
-            All Products
+            <span className="sm:hidden">Products</span>
+            <span className="hidden sm:inline">All Products</span>
           </Link>
         </nav>
 

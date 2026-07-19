@@ -5,29 +5,29 @@ import type { Category, ProductWithCategory } from "@/lib/types";
 // so the storefront design can be previewed immediately without a database.
 
 export const SEED_CATEGORIES: Category[] = [
-  { id: "cat-simu", name: "Phones", slug: "simu", created_at: "2026-01-01T00:00:00Z" },
+  { id: "cat-simu", name: "Phones", slug: "simu", image_url: null, created_at: "2026-01-01T00:00:00Z" },
   {
     id: "cat-laptop-na-pc",
     name: "Laptops & PCs",
-    slug: "laptop-na-pc",
+    slug: "laptop-na-pc", image_url: null,
     created_at: "2026-01-01T00:00:00Z",
   },
   {
     id: "cat-playstation",
     name: "PlayStation",
-    slug: "playstation",
+    slug: "playstation", image_url: null,
     created_at: "2026-01-01T00:00:00Z",
   },
   {
     id: "cat-jbl-speakers",
     name: "JBL Speakers",
-    slug: "jbl-speakers",
+    slug: "jbl-speakers", image_url: null,
     created_at: "2026-01-01T00:00:00Z",
   },
   {
     id: "cat-ring-lights",
     name: "Ring Lights",
-    slug: "ring-lights",
+    slug: "ring-lights", image_url: null,
     created_at: "2026-01-01T00:00:00Z",
   },
 ];

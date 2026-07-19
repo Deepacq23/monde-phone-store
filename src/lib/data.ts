@@ -169,3 +169,30 @@ export async function getAllProductSlugs(): Promise<string[]> {
   }
   return SEED_PRODUCTS.map((p) => p.slug);
 }
+
+/** category_id -> number of in-stock products. Used for category cards. */
+export async function getCategoryProductCounts(): Promise<Record<string, number>> {
+  if (hasSupabaseEnv()) {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("products")
+        .select("category_id")
+        .eq("in_stock", true);
+      if (error) throw error;
+      const counts: Record<string, number> = {};
+      for (const row of data ?? []) {
+        counts[row.category_id] = (counts[row.category_id] ?? 0) + 1;
+      }
+      return counts;
+    } catch (err) {
+      console.error("getCategoryProductCounts: falling back to seed data —", err);
+    }
+  }
+
+  const counts: Record<string, number> = {};
+  for (const p of SEED_PRODUCTS) {
+    if (p.in_stock) counts[p.category_id] = (counts[p.category_id] ?? 0) + 1;
+  }
+  return counts;
+}
